@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.main {
+				width: 300px;
+				height: 400px;
+				margin: auto;
+				background-color: snow;
+				border-radius: 20px;
+				/* 设置区域水平居中 */
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				right: 0px;
+				bottom: 0px;
+			}
+			.header {
+				width: 100%;
+				height: 40%;
+				/* background-color: aqua; */
+			}
+			.headerImg {
+				width: 64px;
+				height: 64px;
+				/* background-color: #000000; */
+				margin: auto;
+				/* position: relative; */
+				padding-top: 20%;
+			}
+			.headerWord {
+				width: 100%;
+				height: 60%;
+				/* background-color: aliceblue; */
+				text-align: center;
+				/* position: relative; */
+				padding-top: 5%;
+				/* top: 10%; */
+			}
+
+			.inputUsername {
+				width: 100%;
+				height: 15%;
+				text-align: center;
+				padding-top: 20%;
+			}
+			.inputPassword {
+				width: 100%;
+				height: 15%;
+				text-align: center;
+				padding-top: 5%;
+			}
+			.mui-input-clear {
+				width: 80%;
+				border-radius: 10px;
+			}
+			/* .remenberMe {
+				padding-top: 5%;
+			} */
+			.Button {
+				text-align: center;
+				padding-top: 10%;
+			}
+			.loginButton {
+				width: 80px;
+				height: 40px;
+				border-radius: 20px;
+				background-color: dodgerblue;
+			}
+			.Text {
+				/* font-family: fixedsys; */
+			}
+		</style>
+	</head>
+	<body style="background-color: gray;">
+		<div class="main">
+			<div class="header">
+				<div class="headerImg">
+					<svg t="1627099762424" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1842" width="64" height="64"><path d="M512 1024C229.220848 1024 0 794.779152 0 512S229.220848 0 512 0 1024 229.220848 1024 512 794.779152 1024 512 1024z m0-496.484848a170.666667 170.666667 0 1 0 0-341.333334 170.666667 170.666667 0 0 0 0 341.333334z m263.757576 263.757575a263.757576 263.757576 0 1 0-527.515152 0h527.515152z" fill="#C4C4C4" p-id="1843"></path></svg>
+				</div>
+				<div class="headerWord">
+					<p class="Text">Coding the word! Coding the futher!</p>
+				</div>
+			</div>
+            <form action="/blog/login/" method="post" enctype="multipart/form-data">
+                {%csrf_token%}
+                <div class="inputUsername">
+                    <input type="text" name="username" class="mui-input-clear" placeholder="">
+                </div>
+                <div class="inputPassword">
+                    <input type="text" name="password" class="mui-input-clear" placeholder="">
+                </div>
+                <div class="Button">
+                    <input type="submit" class="loginButton" value="login">
+                </div>
+            </form>
+		</div>
+	</body>
+</html>
