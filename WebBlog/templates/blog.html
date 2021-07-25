@@ -25,7 +25,7 @@
 			}
 			.main {
 				width: 1000px;
-				height: 1000px;
+				height: 700px;
 				background-color: black;
 				margin: 40px auto;
 				background-color: snow;
@@ -49,13 +49,23 @@
 			.blog-introduce {
 				width: 100%;
 				height: 30%;
-				border-radius: 10px;
-				background-color: snow;
-				margin: 15px 0 15px 0;
-				box-shadow: 0 0 5px gray;
+				{#border-radius: 10px;#}
+				{#background-color: snow;#}
+				margin: 15px 0 20px 0;
+				{#box-shadow: 0 0 5px gray;#}
 			}
+            .blog-introduce-word-1 {
+                font-family: "Times New Roman";
+                font-size: 20px;
+                text-align: center;
+            }
+            .blog-introduce-word-2 {
+                font-family: 宋体;
+                font-size: 20px;
+                text-align: center;
+            }
 			.blog-link {
-				width: 100%;
+				{#width: 100%;#}
 				/* height: 20%; */
 				/* background-color: aquamarine; */
 			}
@@ -75,6 +85,7 @@
 				position: relative;
 				top: 30px;
 				left: 20px;
+                text-align: center;
 			}
 			.blog-name-link {
 			}
@@ -84,14 +95,19 @@
 				border-top: solid #000000 2px;
 			}
 			.blog-link-list {
-				text-align: left;
+				text-align: center;
 			}
 			.menu {
 				position: relative;
 				bottom: 10px;
 				font-size: 20px;
-				padding-left: 20px;
+				{#padding-left: 20px;#}
 			}
+            .menuItemCSDN {
+                padding-left: 30px;
+                padding-right: 30px;
+                text-align: center;
+            }
 			.footer {
 				width: 40%;
 				height: 100px;
@@ -101,7 +117,8 @@
 				left: 30%;
 				bottom: 20px;
 				box-shadow: 0 0 10px gray;
-				display: -moz-box;/*兼容Firefox*/
+
+                display: -moz-box;/*兼容Firefox*/
 				display: -webkit-box;/*兼容FSafari、Chrome*/
 		
 				-moz-box-align: center;/*兼容Firefox*/
@@ -113,6 +130,14 @@
 			.footer-text {
 				
 			}
+            .bodyer {
+                width: 80%;
+                height: 200px;
+                background-color: black;
+                position: absolute;
+                top: 330px;
+                left: 10%;
+            }
 		</style>
 	</head>
 	<body style="background-color: gainsboro;">
@@ -120,31 +145,32 @@
 		<div class="main">
 			<div class="header">
 				<div class="blog-name">
-					<img src="{% static "img/avatar.jpg" %}" class="blog-name-avator" alt="avatar for the blog">
+{#					<img src="{% static "img/avatar.jpg" %}" class="blog-name-avator" alt="avatar for the blog">#}
 					<a href="https://www.baidu.com/" class="blog-name-link"> <p class="blog-name-name">Altria Vin の blog</p> </a>
 				</div>
 				<div class="blog-introduce">
-					<p>student, friend, learning and life</p>
-					<p>The greatest enemy of knowledge is not ignorance, it is the illusion of knowledge. --Stephen Hawking</p>
+					<p class="blog-introduce-word-1">student, friend, learning and life</p>
+					<p class="blog-introduce-word-2">分享生活，学习知识，留住生命中的每一份感动</p>
+{#					<p>The greatest enemy of knowledge is not ignorance, it is the illusion of knowledge. --Stephen Hawking</p>#}
 				</div>
 				<div class="blog-link-top"></div>
 				<div class="blog-link">
 					<ul class="blog-link-list">
 						<li class="menuItemHome">
-							<a class="menu" href="https://www.baidu.com/">home</a>
+							<a class="menu" href="https://www.baidu.com/">随笔</a>
 						</li>
 						<li class="menuItemCSDN">
-							<a class="menu" href="https://www.baidu.com/">CSDN</a>
+							<a class="menu" href="https://www.baidu.com/">算法</a>
 						</li>
 						<li class="menuItemGithub">
-							<a class="menu" href="https://www.baidu.com/">github</a>
+							<a class="menu" href="https://www.baidu.com/">工程</a>
 						</li>
 					</ul>
 				</div>
 				<div class="blog-link-top"></div>
 			</div>
 			<div class="bodyer">
-				
+
 			</div>
 			<div class="footer">
 				Copyright © 2021 Altria Vin
