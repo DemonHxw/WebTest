@@ -20,4 +20,5 @@ from blog.views import *
 urlpatterns = [
     path('login/', login, name = 'login'),
     path('Altria Vin/', blog, name = 'Altria Vin'),
+    path('blogEditor/', blogEditor, name = "blogEditor"),
 ]

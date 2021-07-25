@@ -25,7 +25,7 @@
 			}
 			.main {
 				width: 1000px;
-				height: 700px;
+				height: 900px;
 				background-color: black;
 				margin: 40px auto;
 				background-color: snow;
@@ -117,6 +117,7 @@
 				left: 30%;
 				bottom: 20px;
 				box-shadow: 0 0 10px gray;
+                font-size: 20px;
 
                 display: -moz-box;/*兼容Firefox*/
 				display: -webkit-box;/*兼容FSafari、Chrome*/
@@ -133,10 +134,74 @@
             .bodyer {
                 width: 80%;
                 height: 200px;
-                background-color: black;
+                {#background-color: black;#}
                 position: absolute;
                 top: 330px;
                 left: 10%;
+            }
+            .blog-title {
+                width: 100%;
+                height: 45%;
+                text-align: center;
+                {#background-color: aqua;#}
+            }
+            .blog-title-word {
+                font-family: "Times New Roman";
+                font-size: 40px;
+                position: relative;
+                left: 20px;
+                top: 10px;
+                display: inline;
+            }
+            .blog-title-word-2 {
+                position: relative;
+            }
+            .blog-title-word-2:hover {
+                animation-name: title-antimation;
+                animation-duration: 2s;
+            }
+            {#.blog-title-left {#}
+            {#    width: 0px;#}
+			{#	height: 100%;#}
+			{#	border-top: solid #000000 10px;#}
+            {#}#}
+            @keyframes title-antimation {
+                0% {
+                    font-size: 40px;
+                }
+                50% {
+                    font-size: 50px;
+                }
+                100% {
+                    font-size: 40px;
+                }
+            }
+            .blog-content {
+                width: 100%;
+                height: 28%;
+                {#background-color: blue;#}
+                font-family: 宋体;
+                font-size: 25px;
+                display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
+            }
+            .blog-footer {
+                width: 100%;
+                height: 10%;
+                position: relative;
+                top: 20px;
+                font-size: 20px;
+                {#background-color: blueviolet;#}
+            }
+            .bodyer-child {
+                width: 100%;
+                height: 200px;
+                {#background-color: aliceblue;#}
+                {#border-radius: 10px;#}
+                {#box-shadow: 0 0 15px gray;#}
+                margin-bottom: 10px; border: 0; padding: 0;
+            }
+            .clear {
+                {#margin: 60px;#}
             }
 		</style>
 	</head>
@@ -170,6 +235,33 @@
 				<div class="blog-link-top"></div>
 			</div>
 			<div class="bodyer">
+                <div class="bodyer-child">
+                    <div class="blog-title">
+                        <a href="" class="blog-title-word">
+                            {#                        <div class="blog-title-left"></div>#}
+                            <span class="blog-title-word-2"> this is a test</span>
+                        </a>
+                    </div>
+                    <div class="blog-content">
+                        <span>你好发酵后i阿斯弗hi哦的撒娇哈佛i啊圣诞节分红爱撒娇哈佛i阿娇是滴哦飞机阿松i佛i啊是大家佛i阿萨的环境佛i哈桑都i分红i阿德后i复活节哦i啊是大家佛i返回大嫂哈佛i啊时间和地方教会发hi哦啊是佛i啊好惊悚i地方法师哦哈佛i啊返回到i哈佛i俄双方</span>
+                    </div>
+                    <div class="blog-footer">posted @ 2021-07-24 11:59 by Altria Vin</div>
+                </div>
+
+                <div class="bodyer-child">
+                    <div class="blog-title">
+                        <a href="" class="blog-title-word">
+                            {#                        <div class="blog-title-left"></div>#}
+                            <span class="blog-title-word-2"> this is a test</span>
+                        </a>
+                    </div>
+                    <div class="blog-content">
+                        <span>你好发酵后i阿斯弗hi哦的撒娇哈佛i啊圣诞节分红爱撒娇哈佛i阿娇是滴哦飞机阿松i佛i啊是大家佛i阿萨的环境佛i哈桑都i分红i阿德后i复活节哦i啊是大家佛i返回大嫂哈佛i啊时间和地方教会发hi哦啊是佛i啊好惊悚i地方法师哦哈佛i啊返回到i哈佛i俄双方</span>
+                    </div>
+                    <div class="blog-footer">
+                        posted @ 2021-07-24 11:59 by Altria Vin
+                    </div>
+                </div>
 
 			</div>
 			<div class="footer">

@@ -1,6 +1,9 @@
 from django.test import TestCase
-
+import ast
 # Create your tests here.
 
-with open("blog-test.md") as f:
-    print(f.readlines())
+content = str({"blogcontent":"fjisdaojfisod","flag":1})
+contentDict = ast.literal_eval(content)
+
+print(contentDict, type(contentDict))
+print(content, type(content))
