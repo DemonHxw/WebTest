@@ -25,7 +25,8 @@
 			}
 			.main {
 				width: 1000px;
-				height: 900px;
+                height: {{ length }};
+				{#height: 500px;#}
 				background-color: black;
 				margin: 40px auto;
 				background-color: snow;
@@ -235,31 +236,23 @@
 				<div class="blog-link-top"></div>
 			</div>
 			<div class="bodyer">
-                <div class="bodyer-child">
-                    <div class="blog-title">
-                        <a href="" class="blog-title-word">
-                            {#                        <div class="blog-title-left"></div>#}
-                            <span class="blog-title-word-2"> this is a test</span>
-                        </a>
-                    </div>
-                    <div class="blog-content">
-                        <span>你好发酵后i阿斯弗hi哦的撒娇哈佛i啊圣诞节分红爱撒娇哈佛i阿娇是滴哦飞机阿松i佛i啊是大家佛i阿萨的环境佛i哈桑都i分红i阿德后i复活节哦i啊是大家佛i返回大嫂哈佛i啊时间和地方教会发hi哦啊是佛i啊好惊悚i地方法师哦哈佛i啊返回到i哈佛i俄双方</span>
-                    </div>
-                    <div class="blog-footer">posted @ 2021-07-24 11:59 by Altria Vin</div>
-                </div>
 
                 <div class="bodyer-child">
                     <div class="blog-title">
                         <a href="" class="blog-title-word">
-                            {#                        <div class="blog-title-left"></div>#}
-                            <span class="blog-title-word-2"> this is a test</span>
+{#                            <div class="blog-title-left"></div>#}
+                            {% for file in files %}
+                            <span class="blog-title-word-2">{{ file }}</span>
+                            {% endfor %}
                         </a>
                     </div>
                     <div class="blog-content">
-                        <span>你好发酵后i阿斯弗hi哦的撒娇哈佛i啊圣诞节分红爱撒娇哈佛i阿娇是滴哦飞机阿松i佛i啊是大家佛i阿萨的环境佛i哈桑都i分红i阿德后i复活节哦i啊是大家佛i返回大嫂哈佛i啊时间和地方教会发hi哦啊是佛i啊好惊悚i地方法师哦哈佛i啊返回到i哈佛i俄双方</span>
+                        {% for content in contents %}
+                        <span>{{ content }}</span>
+                        {% endfor %}
                     </div>
                     <div class="blog-footer">
-                        posted @ 2021-07-24 11:59 by Altria Vin
+                        posted @ {{ times }} by Altria Vin
                     </div>
                 </div>
 

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 import ast
 import random
+import time
 from django.http import JsonResponse
 from django.views import View
 from blog.models import *
@@ -27,20 +28,32 @@ def login(request):
 
 
 def blog(request):
-    return render(request, "blog.html")
+    path = "static/blog-text/"
+    files = os.listdir(path)
+    contents = []
+    for file in files:
+        file = "static/blog-text/" + file
+        with open(file, "r", encoding="utf-8") as f:
+            contents.append(f.read())
+    context = {"files": files, "contents": contents, "times": "2021-7-26 21:01", "length": str(500 + len(files) * 200) + "px"}
+    return render(request, "blog.html", context)
 
 
 def blogEditor(request):
     data = request.body.decode("utf-8")
     blogcontent = request.POST.get("blogcontent")
     flag = request.POST.get("flag")
-    # is_submit = request.POST.get("submit", "0")
     if flag == "1":
-        print("blogcontent = " + str(blogcontent))
+        # name = "static/blog-text/" + str(int(time.time())) + ".txt"
+        # with open(name, "w+", encoding="utf-8") as file:
+        #     file.write(blogcontent)
         return JsonResponse({"flag": "1"})
-    # else:
     return render(request, "blogEditor.html")
 
 
 def blogSubmited(request):
     return render(request, "index.html")
+
+
+def verification(request):
+    return render(request, "verification.html")

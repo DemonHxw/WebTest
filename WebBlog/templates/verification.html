@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.main {
+				width: 600px;
+				height: 600px;
+				margin: auto;
+				background-color: snow;
+				border-radius: 20px;
+				/* 设置区域水平居中 */
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				right: 0px;
+				bottom: 0px;
+			}
+			.word {
+				width: 100%;
+				height: 20%;
+				/* background-color: aqua; */
+				font-size: 40px;
+				position: relative;
+				top: 5%;
+				
+				display: -moz-box;/*兼容Firefox*/
+				display: -webkit-box;/*兼容FSafari、Chrome*/
+						
+				-moz-box-align: center;/*兼容Firefox*/
+				-webkit-box-align: center;/*兼容FSafari、Chrome */
+						
+				-moz-box-pack: center;/*兼容Firefox*/
+				-webkit-box-pack: center;/*兼容FSafari、Chrome */
+			}
+			.keyword {
+				width: 100%;
+				height: 25%;
+				position: relative;
+				top: 5%;
+				/* background-color: #000000; */
+			}
+			.keyword-word {
+				width: 18%;
+				height: 80%;
+				/* background-color: #00FF00; */
+				float: left;
+				margin: 2% 1% 0 0;
+				font-size: 25px;
+				
+				display: -moz-box;/*兼容Firefox*/
+				display: -webkit-box;/*兼容FSafari、Chrome*/
+						
+				-moz-box-align: center;/*兼容Firefox*/
+				-webkit-box-align: center;/*兼容FSafari、Chrome */
+						
+				-moz-box-pack: center;/*兼容Firefox*/
+				-webkit-box-pack: center;/*兼容FSafari、Chrome */
+				/* display: inline; */
+			}
+			.keyword-area {
+				width: 78%;
+				height: 80%;
+				background-color: #24C2C7;
+				float: left;
+				margin: 2% 0 0 1%;
+				border-radius: 10px;
+			}
+			.keyword-area1 {
+				width: 20%;
+				height: 40%;
+				background-color: #33FFFF;
+				float: left;
+				margin: 2% 0% 0% 7%;
+				border-radius: 5px;
+			}
+			.keyword-area2 {
+				width: 20%;
+				height: 40%;
+				background-color: #33FFFF;
+				float: left;
+				margin: 2% 2% 0% 2%;
+				border-radius: 5px;
+			}
+			.keyword-area3 {
+				width: 20%;
+				height: 40%;
+				background-color: #33FFFF;
+				float: left;
+				margin: 2% 2% 0% 0%;
+				border-radius: 5px;
+			}
+			.keyword-area4 {
+				width: 20%;
+				height: 40%;
+				background-color: #33FFFF;
+				float: left;
+				margin: 2% 0% 0% 0%;
+				border-radius: 5px;
+			}
+			.keyword-area5 {
+				width: 20%;
+				height: 40%;
+				background-color: #33FFFF;
+				float: left;
+				margin: 1% 0% 0% 7%;
+				border-radius: 5px;
+			}
+			.keyword-area6 {
+				width: 20%;
+				height: 40%;
+				background-color: #33FFFF;
+				float: left;
+				margin: 1% 2% 0% 2%;
+				border-radius: 5px;
+			}
+			.keyword-area7 {
+				width: 20%;
+				height: 40%;
+				background-color: #33FFFF;
+				float: left;
+				margin: 1% 2% 0% 0%;
+				border-radius: 5px;
+			}
+			.keyword-area8 {
+				width: 20%;
+				height: 40%;
+				background-color: #33FFFF;
+				float: left;
+				margin: 1% 0% 2% 0%;
+				border-radius: 5px;
+			}
+			.blogType {
+				width: 100%;
+				height: 15%;
+				position: relative;
+				top: 7%;
+				/* background-color: #33FFFF; */
+			}
+			.blogType-word {
+				width: 18%;
+				height: 80%;
+				/* background-color: #00FF00; */
+				float: left;
+				margin: 0% 0% 0 1%;
+				font-size: 25px;
+				
+				display: -moz-box;/*兼容Firefox*/
+				display: -webkit-box;/*兼容FSafari、Chrome*/
+						
+				-moz-box-align: center;/*兼容Firefox*/
+				-webkit-box-align: center;/*兼容FSafari、Chrome */
+						
+				-moz-box-pack: center;/*兼容Firefox*/
+				-webkit-box-pack: center;/*兼容FSafari、Chrome */
+			}
+			.blogType-pull {
+				width: 78%;
+				height: 80%;
+				background-color: #0088FF;
+				border-radius: 10px;
+				float: left;
+				margin: 0% 0 0 1%;
+			}
+			.blogType-pull-area1 {
+				width: 20%;
+				height: 70%;
+				float: left;
+				background-color: #00FF00;
+				border-radius: 10px;
+				margin: 2% 0% 0% 18%;
+			}
+			.blogType-pull-area2 {
+				width: 20%;
+				height: 70%;
+				float: left;
+				background-color: #00FF00;
+				border-radius: 10px;
+				margin: 2% 2% 0% 2%;
+			}
+			.blogType-pull-area3 {
+				width: 20%;
+				height: 70%;
+				float: left;
+				background-color: #00FF00;
+				border-radius: 10px;
+				margin: 2% 0% 0% 0%;
+			}
+			.password {
+				width: 100%;
+				height: 15%;
+				position: relative;
+				top: 5%;
+				/* background-color: #008803; */
+			}
+			.password-word {
+				width: 18%;
+				height: 80%;
+				/* background-color: #00FF00; */
+				float: left;
+				margin: 0% 0% 0 1%;
+				font-size: 25px;
+				
+				display: -moz-box;/*兼容Firefox*/
+				display: -webkit-box;/*兼容FSafari、Chrome*/
+						
+				-moz-box-align: center;/*兼容Firefox*/
+				-webkit-box-align: center;/*兼容FSafari、Chrome */
+						
+				-moz-box-pack: center;/*兼容Firefox*/
+				-webkit-box-pack: center;/*兼容FSafari、Chrome */
+			}
+			.password-textarea {
+				width: 80%;
+				height: 80%;
+				/* background-color: #000000; */
+				float: left;
+			}
+			#submitPassword {
+				width: 98%;
+				height: 40%;
+				border-radius: 10px;
+				margin: 4% 0 0 0;
+			}
+			.submit {
+				width: 100%;
+				height: 25%;
+				/* background-color: aquamarine; */
+				/* position: relative; */
+				/* display: inline */
+			}
+			#submitButton {
+				font-size: 40px;
+				border-radius: 10px;
+				background-color: white;
+				box-shadow: 0 0 10px gray;
+				/* background-color: aquamarine; */
+				margin: 40px 0px 0px 240px;
+			}
+		</style>
+	</head>
+	<body style="background-color: gray;">
+		<div class="main">
+			<div class="word">
+				Welcome! Altria Vin
+			</div>
+			<!-- <div class="title">
+				<div class="title-word">
+					主题
+				</div>
+				<div class="title-textarea">
+					<textarea class="title-textarea-real"></textarea>
+				</div>
+			</div> -->
+			<div class="keyword">
+				<div class="keyword-word">
+					关键词
+				</div>
+				<div class="keyword-area">
+					<div class="keyword-area1">
+						<input type="checkbox" id="keyword1"/>
+						<label for="keyword1">算法</label>
+					</div>
+					<div class="keyword-area2">
+						<input type="checkbox" id="keyword2"/>
+						<label for="keyword1">算法</label>
+					</div>
+					<div class="keyword-area3">
+						<input type="checkbox" id="keyword3"/>
+						<label for="keyword1">算法</label>
+					</div>
+					<div class="keyword-area4">
+						<input type="checkbox" id="keyword4"/>
+						<label for="keyword1">算法</label>
+					</div>
+					<div class="keyword-area5">
+						<input type="checkbox" id="keyword5"/>
+						<label for="keyword1">算法</label>
+					</div>
+					<div class="keyword-area6">
+						<input type="checkbox" id="keyword6"/>
+						<label for="keyword1">算法</label>
+					</div>
+					<div class="keyword-area7">
+						<input type="checkbox" id="keyword7"/>
+						<label for="keyword1">算法</label>
+					</div>
+					<div class="keyword-area8">
+						<input type="checkbox" id="keyword8"/>
+						<label for="keyword1">算法</label>
+					</div>
+				</div>
+			</div>
+			<div class="blogType">
+				<div class="blogType-word">
+					博客类型
+				</div>
+				<div class="blogType-pull">
+					<div class="blogType-pull-area1">
+						<input type="checkbox" id="blogType1"/>
+						<label for="blogType1">随笔</label>
+					</div>
+					<div class="blogType-pull-area2">
+						<input type="checkbox" id="blogType2"/>
+						<label for="blogType2">算法</label>
+					</div>
+					<div class="blogType-pull-area3">
+						<input type="checkbox" id="blogType3"/>
+						<label for="blogType3">工程</label>
+					</div>
+				</div>
+			</div>
+			<div class="password">
+				<div class="password-word">
+					密码
+				</div>
+				<div class="password-textarea">
+					<input type="password" name="submitPassword" id="submitPassword" value="" />
+				</div>
+			</div>
+			<div class="submit">
+				<input type="button" name="submitButton" id="submitButton" value="submit" />
+			</div>
+		</div>
+	</body>
+</html>
