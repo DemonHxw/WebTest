@@ -22,4 +22,5 @@ urlpatterns = [
     path('Altria Vin/', blog, name = 'Altria Vin'),
     path('blogEditor/', blogEditor, name = "blogEditor"),
     path('verification/', verification, name = "verification"),
+    path('blogShow/', blogShow),
 ]

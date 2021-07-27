@@ -26,8 +26,6 @@
 			.main {
 				width: 1000px;
                 height: {{ length }};
-				{#height: 500px;#}
-				background-color: black;
 				margin: 40px auto;
 				background-color: snow;
 				border-radius: 20px;
@@ -211,13 +209,11 @@
 		<div class="main">
 			<div class="header">
 				<div class="blog-name">
-{#					<img src="{% static "img/avatar.jpg" %}" class="blog-name-avator" alt="avatar for the blog">#}
-					<a href="https://www.baidu.com/" class="blog-name-link"> <p class="blog-name-name">Altria Vin の blog</p> </a>
+					<a href="" class="blog-name-link"> <p class="blog-name-name">Altria Vin の blog</p> </a>
 				</div>
 				<div class="blog-introduce">
 					<p class="blog-introduce-word-1">student, friend, learning and life</p>
 					<p class="blog-introduce-word-2">分享生活，学习知识，留住生命中的每一份感动</p>
-{#					<p>The greatest enemy of knowledge is not ignorance, it is the illusion of knowledge. --Stephen Hawking</p>#}
 				</div>
 				<div class="blog-link-top"></div>
 				<div class="blog-link">
@@ -237,24 +233,21 @@
 			</div>
 			<div class="bodyer">
 
+                {% for blogs in Blog %}
                 <div class="bodyer-child">
                     <div class="blog-title">
                         <a href="" class="blog-title-word">
-{#                            <div class="blog-title-left"></div>#}
-                            {% for file in files %}
-                            <span class="blog-title-word-2">{{ file }}</span>
-                            {% endfor %}
+                            <span class="blog-title-word-2">{{ blogs.title }}</span>
                         </a>
                     </div>
                     <div class="blog-content">
-                        {% for content in contents %}
-                        <span>{{ content }}</span>
-                        {% endfor %}
+                        <span>{{ blogs.content }}</span>
                     </div>
                     <div class="blog-footer">
-                        posted @ {{ times }} by Altria Vin
+                        posted @ {{ blogs.time }} by Altria Vin
                     </div>
                 </div>
+                {% endfor %}
 
 			</div>
 			<div class="footer">

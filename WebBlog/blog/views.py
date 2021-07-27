@@ -11,6 +11,7 @@ import requests
 import json
 import pandas as pd
 import os
+import markdown
 
 
 def login(request):
@@ -28,15 +29,23 @@ def login(request):
 
 
 def blog(request):
+    class blogTest:
+        def __init__(self, title, content, time):
+            self.title = title
+            self.content = content
+            self.time = time
+    Blog = []
     path = "static/blog-text/"
     files = os.listdir(path)
     contents = []
     for file in files:
         file = "static/blog-text/" + file
         with open(file, "r", encoding="utf-8") as f:
-            contents.append(f.read())
-    context = {"files": files, "contents": contents, "times": "2021-7-26 21:01", "length": str(500 + len(files) * 200) + "px"}
-    return render(request, "blog.html", context)
+            content = f.read()
+            BlogTmp = blogTest(title=file, content=content, time="2021-7-26 21:01")
+            Blog.append(BlogTmp)
+    length = str(500 + len(files) * 200) + "px"
+    return render(request, "blog.html", context={"Blog": Blog, "length": length})
 
 
 def blogEditor(request):
@@ -49,6 +58,15 @@ def blogEditor(request):
         #     file.write(blogcontent)
         return JsonResponse({"flag": "1"})
     return render(request, "blogEditor.html")
+
+
+def blogShow(request):
+    exts = ['markdown.extensions.extra', 'markdown.extensions.codehilite', 'markdown.extensions.tables',
+            'markdown.extensions.toc']
+    with open("static/blog-text/tedxt.md", "r+", encoding="utf-8") as file:
+        content = file.read()
+    ret = markdown.markdown(content, extensions=exts)
+    return render(request, "blogShow.html", context={"content": ret})
 
 
 def blogSubmited(request):
