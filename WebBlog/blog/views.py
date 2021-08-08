@@ -4,6 +4,8 @@ import random
 import time
 from django.http import JsonResponse
 from django.views import View
+from mdx_math import MathExtension
+
 from blog.models import *
 from django.forms.models import model_to_dict
 from django.core.mail import send_mail
@@ -12,7 +14,6 @@ import json
 import pandas as pd
 import os
 import markdown
-
 
 def login(request):
     username_real = "Altria Vin"
@@ -42,7 +43,7 @@ def blog(request):
         file = "static/blog-text/" + file
         with open(file, "r", encoding="utf-8") as f:
             content = f.read()
-            BlogTmp = blogTest(title=file, content=content, time="2021-7-26 21:01")
+            BlogTmp = blogTest(title=file[17:-3], content=content, time="2021-7-26 21:01")
             Blog.append(BlogTmp)
     length = str(500 + len(files) * 200) + "px"
     return render(request, "blog.html", context={"Blog": Blog, "length": length})
@@ -61,12 +62,21 @@ def blogEditor(request):
 
 
 def blogShow(request):
+    # exts = ['markdown.extensions.extra', 'markdown.extensions.codehilite', 'markdown.extensions.tables',
+    #         'markdown.extensions.toc', MathExtension(enable_dollar_delimiter=True)]
     exts = ['markdown.extensions.extra', 'markdown.extensions.codehilite', 'markdown.extensions.tables',
             'markdown.extensions.toc']
-    with open("static/blog-text/tedxt.md", "r+", encoding="utf-8") as file:
+    filename = request.GET.get("blogname")
+    fileName = "static/blog-text/" + filename + ".md"
+    # print(fileName)
+    with open(fileName, "r+", encoding="utf-8") as file:
         content = file.read()
     ret = markdown.markdown(content, extensions=exts)
-    return render(request, "blogShow.html", context={"content": ret})
+    # print(ret, type(ret))
+    with open("templates/blogTmp.html", "w+", encoding="utf-8") as file:
+        # print(file.read())
+        file.write(ret)
+    return render(request, "blogShow.html")
 
 
 def blogSubmited(request):
