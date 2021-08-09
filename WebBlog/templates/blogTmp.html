@@ -1,4 +1,110 @@
-<p>这是我的第一篇blog在这个blog上。</p>
-<p>为什么我要创建这个blog呢？为什么我不用使用现在比较流行的hexo，直接部署到GitHub上，这样可以省很多事情，而且几乎没有开发的成本，一旦样式配置好了之后就不用管太多啦，以后需要的不过是写blog等。</p>
-<p>我也不知道为什么，可能因为自己比较闲吧，哈哈哈哈哈！也许我会在后续的开发过中找到问题的答案。</p>
-<p>欢迎来到我的世界！！！</p>
+<p>题目链接：https://atcoder.jp/contests/abc172/tasks/abc172_f</p>
+<p>题意：给你$n$堆石子，每堆石子有$a[i]$个。现在两个人玩游戏，每次可以重一推石子中取走$1$个，$2$个，或者把这一堆石子全部取走。现在在游戏开始之前，你可以将第一堆中的若干($1-&gt;a[1]-1$)个石子放到第二堆，问你最少放多少个可以保证后手必赢，如果不行的话，输出$-1$。</p>
+<p>思路：首先我们知道这是一个$nim$游戏，结论就是$a[1] \bigoplus a[2]\bigoplus a[3] ... \bigoplus a[n]=0$的话，后手必败。所以这一题题意就可以转化成，求解最小的$ans$，使得
+$(a[1]-ans) \bigoplus (a[2]+ans)\bigoplus a[3] ... \bigoplus a[n]=0$
+那该怎么求呢？$1e12$的数据范围，暴力是不可能的啦...
+我们设$A = a[1] - ans,B = a[2] + ans$，这样我们就可以可以知道
+$A  \bigoplus B = a[3]  \bigoplus... \bigoplus a[n]=y$
+$A+B = a[1] + a[2] = x$</p>
+<p>现在就需要一个非常有用的公式$a + b = a \bigoplus b + 2(a \bigwedge b)$</p>
+<p>这样我们就可以得到
+$$ \left{
+\begin{aligned}
+A \bigoplus B  &amp; = &amp; y \
+A \bigwedge B  &amp; = &amp; \frac{(x - y)}2
+\end{aligned}
+\right.
+$$</p>
+<p>另$\frac{x-y}{2} = X , y = Y$(只是为了后续书写看起来舒服点)
+这里我们就可以看到$x &gt; y$ || $(x - y)$%$2 !=0$，那可定要输出-1。
+我们用$X_i,Y_i,A_i,B_i$表示分别表示$X,Y,A,B$第$i$位二进制数，现在我们就是要找到
+$A &lt; a[1]$的最大值，可以看到$A_{min} = X$，那我们接下来就看一下$X_i,Y_i$四种情况下$A$的值有啥变化。
+$X_i = 1$ &amp;&amp; $Y_i = 1$，$A_i,B_i$无解，输出-1；
+$X_i = 1$ &amp;&amp; $Y_i = 0$，$A_i = 1,B_i = 0$ || $A_i = 0,B_i = 1$，因为我们要让$A$尽量大，我们就要在$A + 2^{i-1} &lt; a[1]$的情况下让$A_i = 1$;
+$X_i = 0$ &amp;&amp; $Y_i = 1$，$A_i = 1,B_i=1$，$A$值不变；
+$X_i = 0$ &amp;&amp; $Y_i = 0$，$A_i=0,B_i=0$，$A$值不变；</p>
+<p>这样，这道题就可以解出来啦，具体操作详见代码。</p>
+<p>AC代码：</p>
+<div class="codehilite"><pre><span></span><code><span class="cp">#define _CRT_SECURE_NO_WARNINGS 1</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;set&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;map&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stack&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;queue&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;ctime&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iomanip&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="nn">std</span><span class="p">;</span>
+
+<span class="cp">#define LL long long</span>
+<span class="cp">#define pii pair&lt;int,int&gt;</span>
+<span class="cp">#define sd(x) scanf(&quot;%d&quot;,&amp;x)</span>
+<span class="cp">#define slld(x) scanf(&quot;%lld&quot;,&amp;x)</span>
+<span class="cp">#define pd(x) printf(&quot;%d\n&quot;,x)</span>
+<span class="cp">#define plld(x) printf(&quot;%lld\n&quot;,x)</span>
+<span class="cp">#define rep(i,a,b) for(int i = (a) ; i &lt;= (b) ; i++)</span>
+<span class="cp">#define per(i,a,b) for(int i = (a) ; i &gt;= (b) ; i--)</span>
+<span class="cp">#define mem(a) memset(a,0,sizeof(a))</span>
+<span class="cp">#define lson l , m , rt &lt;&lt; 1</span>
+<span class="cp">#define rson m + 1 , r , rt &lt;&lt; 1 | 1</span>
+<span class="cp">#define fast_io ios::sync_with_stdio(false)</span>
+
+<span class="k">const</span> <span class="n">LL</span> <span class="n">mod</span> <span class="o">=</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">maxn</span> <span class="o">=</span> <span class="mf">5e5</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">INF</span> <span class="o">=</span> <span class="mh">0x3f3f3f3f</span><span class="p">;</span>
+<span class="k">const</span> <span class="kt">double</span> <span class="n">pi</span> <span class="o">=</span> <span class="n">acos</span><span class="p">(</span><span class="mf">-1.0</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+
+<span class="cp">#ifndef ONLINE_JUDGE</span>
+<span class="c1">//  freopen(&quot;in.txt&quot;, &quot;r&quot;, stdin);</span>
+<span class="c1">//  freopen(&quot;out.txt&quot;, &quot;w&quot;, stdout);</span>
+    <span class="kt">long</span> <span class="n">_begin_time</span> <span class="o">=</span> <span class="n">clock</span><span class="p">();</span>
+<span class="cp">#endif</span>
+
+    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+    <span class="n">sd</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">LL</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
+    <span class="n">slld</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">slld</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+    <span class="n">LL</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+    <span class="n">LL</span> <span class="n">Xor</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">rep</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">LL</span> <span class="n">x</span><span class="p">;</span>
+        <span class="n">slld</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+        <span class="n">Xor</span> <span class="o">^=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">bool</span> <span class="n">flag</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">sum</span> <span class="o">&lt;</span> <span class="n">Xor</span> <span class="o">||</span> <span class="p">(</span><span class="n">sum</span> <span class="o">-</span> <span class="n">Xor</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">flag</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+
+    <span class="n">LL</span> <span class="n">And</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">-</span> <span class="n">Xor</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">LL</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">And</span><span class="p">;</span>
+    <span class="n">per</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">xx</span> <span class="o">=</span> <span class="p">((</span><span class="n">And</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mf">1L</span><span class="n">L</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">yy</span> <span class="o">=</span> <span class="p">((</span><span class="n">Xor</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mf">1L</span><span class="n">L</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">xx</span> <span class="o">&amp;&amp;</span> <span class="n">yy</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">xx</span> <span class="o">&amp;&amp;</span> <span class="n">yy</span> <span class="o">&amp;&amp;</span> <span class="p">((</span><span class="n">ans</span> <span class="o">|</span> <span class="p">(</span><span class="mf">1L</span><span class="n">L</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">a</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">ans</span> <span class="o">|=</span> <span class="p">(</span><span class="mf">1L</span><span class="n">L</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">ans</span> <span class="o">||</span> <span class="n">ans</span> <span class="o">&gt;</span> <span class="n">a</span> <span class="o">||</span> <span class="n">flag</span><span class="p">)</span> <span class="n">puts</span><span class="p">(</span><span class="s">&quot;-1&quot;</span><span class="p">);</span>
+    <span class="k">else</span> <span class="n">plld</span><span class="p">(</span><span class="n">a</span><span class="o">-</span><span class="n">ans</span><span class="p">);</span>
+
+<span class="cp">#ifndef ONLINE_JUDGE</span>
+    <span class="kt">long</span> <span class="n">_end_time</span> <span class="o">=</span> <span class="n">clock</span><span class="p">();</span>
+    <span class="c1">// cout &lt;&lt; &quot;time = &quot; &lt;&lt;  _end_time - _begin_time &lt;&lt; endl;</span>
+<span class="cp">#endif</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>

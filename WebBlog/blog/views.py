@@ -31,10 +31,11 @@ def login(request):
 
 def blog(request):
     class blogTest:
-        def __init__(self, title, content, time):
+        def __init__(self, title, content, time, type):
             self.title = title
             self.content = content
             self.time = time
+            self.type = type
     Blog = []
     path = "static/blog-text/"
     files = os.listdir(path)
@@ -43,7 +44,7 @@ def blog(request):
         file = "static/blog-text/" + file
         with open(file, "r", encoding="utf-8") as f:
             content = f.read()
-            BlogTmp = blogTest(title=file[17:-3], content=content, time="2021-7-26 21:01")
+            BlogTmp = blogTest(title=file[19:-3], content=content, time="2021-7-26 21:01", type=file[17])
             Blog.append(BlogTmp)
     length = str(500 + len(files) * 200) + "px"
     return render(request, "blog.html", context={"Blog": Blog, "length": length})
