@@ -1,3 +1,4 @@
+import markdown2
 from django.shortcuts import render, redirect
 import ast
 import random
@@ -62,22 +63,36 @@ def blogEditor(request):
     return render(request, "blogEditor.html")
 
 
+# def blogShow(request):
+#     # exts = ['markdown.extensions.extra', 'markdown.extensions.codehilite', 'markdown.extensions.tables',
+#     #         'markdown.extensions.toc', MathExtension(enable_dollar_delimiter=True)]
+#     exts = ['markdown.extensions.extra', 'markdown.extensions.codehilite', 'markdown.extensions.tables',
+#             'markdown.extensions.toc']
+#     filename = request.GET.get("blogname")
+#     fileName = "static/blog-text/" + filename + ".md"
+#     # print(fileName)
+#     with open(fileName, "r+", encoding="utf-8") as file:
+#         content = file.read()
+#     ret = markdown.markdown(content, extensions=exts)
+#     # print(ret, type(ret))
+#     with open("templates/blogTmp.html", "w+", encoding="utf-8") as file:
+#         # print(file.read())
+#         file.write(ret)
+#     return render(request, "blogShow.html")
+
+
+def change_formula(matched):
+    formula = matched.group(0)
+    formula = formula.replace('_', ' _')
+    return '\n<p>'+formula+'</p>\n'
+
 def blogShow(request):
-    # exts = ['markdown.extensions.extra', 'markdown.extensions.codehilite', 'markdown.extensions.tables',
-    #         'markdown.extensions.toc', MathExtension(enable_dollar_delimiter=True)]
-    exts = ['markdown.extensions.extra', 'markdown.extensions.codehilite', 'markdown.extensions.tables',
-            'markdown.extensions.toc']
     filename = request.GET.get("blogname")
-    fileName = "static/blog-text/" + filename + ".md"
-    # print(fileName)
+    fileName = "static/blog-text/1-" + filename + ".md"
     with open(fileName, "r+", encoding="utf-8") as file:
         content = file.read()
-    ret = markdown.markdown(content, extensions=exts)
-    # print(ret, type(ret))
-    with open("templates/blogTmp.html", "w+", encoding="utf-8") as file:
-        # print(file.read())
-        file.write(ret)
-    return render(request, "blogShow.html")
+    content = markdown2.markdown(request.sub(r'\$\$(.+?)\$\$', change_formula, content))
+    return render(request, "blogShow.html", context={"content": content})
 
 
 def blogSubmited(request):
